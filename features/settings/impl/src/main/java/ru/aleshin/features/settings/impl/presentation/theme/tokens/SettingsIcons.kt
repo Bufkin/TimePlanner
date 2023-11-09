@@ -23,7 +23,6 @@ import ru.aleshin.features.settings.impl.R
  */
 internal data class SettingsIcons(
     val back: Int,
-    val default: Int,
     val git: Int,
     val cryptoBitcoin: Int,
     val cryptoBNB: Int,
@@ -33,11 +32,12 @@ internal data class SettingsIcons(
     val cryptoECash: Int,
     val copy: Int,
     val crypto: Int,
+    val cryptoAvax: Int,
+    val cryptoFtm: Int,
 )
 
 internal val baseSettingIcons = SettingsIcons(
     back = R.drawable.ic_back,
-    default = R.drawable.ic_restart,
     git = R.drawable.ic_github,
     cryptoBitcoin = R.drawable.ic_bitcoin,
     cryptoBNB = R.drawable.ic_bnb,
@@ -45,8 +45,10 @@ internal val baseSettingIcons = SettingsIcons(
     cryptoTron = R.drawable.ic_tron,
     cryptoLitecoin = R.drawable.ic_litecoin,
     cryptoECash = R.drawable.ic_ecash_xec,
+    cryptoAvax = R.drawable.ic_avax,
+    cryptoFtm = R.drawable.ic_fantom,
     copy = R.drawable.ic_content_copy,
-    crypto = R.drawable.ic_crypto
+    crypto = R.drawable.ic_crypto,
 )
 
 internal val LocalSettingsIcons = staticCompositionLocalOf<SettingsIcons> {

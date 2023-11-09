@@ -36,6 +36,7 @@ import ru.aleshin.features.settings.impl.domain.interactors.CategoriesInteractor
 import ru.aleshin.features.settings.impl.domain.interactors.ScheduleInteractor
 import ru.aleshin.features.settings.impl.domain.interactors.SettingsInteractor
 import ru.aleshin.features.settings.impl.domain.interactors.TemplatesInteractor
+import ru.aleshin.features.settings.impl.domain.interactors.UndefinedTasksInteractor
 import ru.aleshin.features.settings.impl.presentation.mappers.mapToUi
 import ru.aleshin.features.settings.impl.presentation.models.BackupModel
 import ru.aleshin.features.settings.impl.presentation.ui.settings.contract.SettingsAction
@@ -55,6 +56,7 @@ internal interface DataWorkProcessor : FlowWorkProcessor<DataWorkCommand, Settin
         private val templatesInteractor: TemplatesInteractor,
         private val timeTaskAlarmManager: TimeTaskAlarmManager,
         private val templatesAlarmManager: TemplatesAlarmManager,
+        private val undefinedTasksInteractor: UndefinedTasksInteractor,
         private val dateManager: DateManager,
         private val backupManager: BackupManager,
     ) : DataWorkProcessor {
@@ -75,6 +77,7 @@ internal interface DataWorkProcessor : FlowWorkProcessor<DataWorkCommand, Settin
                     val deletableSchedules = scheduleInteractor.removeAllSchedules().dataOrError(this@flow) ?: return@handle
                     val deletableTimeTasks = deletableSchedules.map { it.timeTasks }.extractAllItem()
                     categoriesInteractor.removeAllCategories().dataOrError(this@flow) ?: return@handle
+                    undefinedTasksInteractor.removeAllUndefinedTask().dataOrError(this@flow) ?: return@handle
 
                     deleteRepeatNotifications(deletedTemplates)
                     deleteNotifications(deletableTimeTasks, deletedTemplates)
@@ -83,13 +86,14 @@ internal interface DataWorkProcessor : FlowWorkProcessor<DataWorkCommand, Settin
                         val restoredSchedules = schedules.map { schedule ->
                             val timeTasks = schedule.timeTasks.filter { timeTask ->
                                 val taskTemplate = templates.find { it.equalsIsTemplate(timeTask) }
-                                return@filter taskTemplate == null || !(taskTemplate.repeatEnabled && timeTask.timeRanges.from > currentDate)
+                                return@filter taskTemplate == null || !(taskTemplate.repeatEnabled && timeTask.timeRange.from > currentDate)
                             }
                             schedule.copy(timeTasks = timeTasks)
                         }
                         val restoreTemplates = templates.map { it.copy(repeatEnabled = false) }
-                        categoriesInteractor.addCategories(categoriesList).dataOrError(this@flow)
+                        categoriesInteractor.addCategories(categories).dataOrError(this@flow)
                         templatesInteractor.addTemplates(restoreTemplates).dataOrError(this@flow)
+                        undefinedTasksInteractor.addUndefinedTasks(undefinedTasks).dataOrError(this@flow)
                         scheduleInteractor.addSchedules(restoredSchedules).dataOrError(this@flow).apply {
                             addNotifications(restoredSchedules.map { it.timeTasks }.extractAllItem())
                         }
@@ -105,7 +109,8 @@ internal interface DataWorkProcessor : FlowWorkProcessor<DataWorkCommand, Settin
                 val schedules = scheduleInteractor.fetchAllSchedules().dataOrError(this) ?: return@run 
                 val categories = categoriesInteractor.fetchAllCategories().dataOrError(this) ?: return@run
                 val templates = templatesInteractor.fetchAllTemplates().dataOrError(this) ?: return@run
-                val backupModel = BackupModel(schedules, templates, categories)
+                val undefinedTasks = undefinedTasksInteractor.fetchAllUndefinedTasks().dataOrError(this) ?: return@run
+                val backupModel = BackupModel(schedules, templates, categories, undefinedTasks)
                 
                 backupManager.saveBackup(uri, backupModel)
             }
@@ -117,7 +122,8 @@ internal interface DataWorkProcessor : FlowWorkProcessor<DataWorkCommand, Settin
             val deletedSchedules = scheduleInteractor.removeAllSchedules().dataOrError(this) ?: return@flow
             val deletedTimeTasks = deletedSchedules.map { it.timeTasks }.extractAllItem()
             categoriesInteractor.removeAllCategories().dataOrError(this)
-            
+            undefinedTasksInteractor.removeAllUndefinedTask().dataOrError(this)
+
             deleteRepeatNotifications(deletedTemplates)
             deleteNotifications(deletedTimeTasks, deletedTemplates)
 
@@ -129,7 +135,7 @@ internal interface DataWorkProcessor : FlowWorkProcessor<DataWorkCommand, Settin
         private fun addNotifications(timeTasks: List<TimeTask>) {
             val currentDate = dateManager.fetchCurrentDate()
             timeTasks.forEach { timeTask ->
-                if (timeTask.isEnableNotification && timeTask.timeRanges.from > currentDate) {
+                if (timeTask.isEnableNotification && timeTask.timeRange.from > currentDate) {
                     timeTaskAlarmManager.addOrUpdateNotifyAlarm(timeTask)
                 }
             }
@@ -139,7 +145,7 @@ internal interface DataWorkProcessor : FlowWorkProcessor<DataWorkCommand, Settin
             val currentDate = dateManager.fetchCurrentDate()
             timeTasks.forEach { timeTask ->
                 val taskTemplate = templates.find { it.equalsIsTemplate(timeTask) }
-                if (timeTask.timeRanges.from > currentDate && (taskTemplate == null || !taskTemplate.repeatEnabled)) {
+                if (timeTask.timeRange.from > currentDate && (taskTemplate == null || !taskTemplate.repeatEnabled)) {
                     timeTaskAlarmManager.deleteNotifyAlarm(timeTask)
                 }
             }

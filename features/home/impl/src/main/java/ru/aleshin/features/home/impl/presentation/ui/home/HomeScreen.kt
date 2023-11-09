@@ -15,7 +15,6 @@
  */
 package ru.aleshin.features.home.impl.presentation.ui.home
 
-import android.util.Log
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
@@ -29,6 +28,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import cafe.adriel.voyager.core.screen.Screen
 import kotlinx.coroutines.launch
+import ru.aleshin.core.ui.views.ErrorSnackbar
 import ru.aleshin.core.utils.extensions.startThisDay
 import ru.aleshin.core.utils.managers.LocalDrawerManager
 import ru.aleshin.core.utils.platform.screen.ScreenContent
@@ -75,13 +75,17 @@ internal class HomeScreen : Screen {
             },
             topBar = {
                 HomeTopAppBar(
+                    calendarIconBehavior = state.calendarButtonBehavior,
                     onMenuIconClick = { scope.launch { drawerManager?.openDrawer() } },
-                    onCalendarIconClick = { isDateDialogShow = true },
+                    onOverviewIconClick = { dispatchEvent(HomeEvent.PressOverviewButton) },
+                    onOpenCalendar = { isDateDialogShow = true },
                     onGoToToday = { dispatchEvent(HomeEvent.LoadSchedule(Date().startThisDay())) },
                 )
             },
             snackbarHost = {
-                SnackbarHost(hostState = snackbarState)
+                SnackbarHost(hostState = snackbarState) { snackbarData ->
+                    ErrorSnackbar(snackbarData)
+                }
             },
         )
 

@@ -38,6 +38,7 @@ import ru.aleshin.features.editor.impl.presentation.ui.editor.contract.EditorVie
 import ru.aleshin.features.editor.impl.presentation.ui.editor.screenmodel.rememberEditorScreenModel
 import ru.aleshin.features.editor.impl.presentation.ui.editor.views.EditorTopAppBar
 import ru.aleshin.features.editor.impl.presentation.ui.editor.views.TemplatesBottomSheet
+import ru.aleshin.features.editor.impl.presentation.ui.editor.views.UndefinedTasksBottomSheet
 import javax.inject.Inject
 
 /**
@@ -54,6 +55,7 @@ internal class EditorScreen @Inject constructor() : Screen {
         EditorTheme {
             val hostState = remember { SnackbarHostState() }
             var isTemplatesSheetOpen by rememberSaveable { mutableStateOf(false) }
+            var isUndefinedTasksSheetOpen by rememberSaveable { mutableStateOf(false) }
             val strings = EditorThemeRes.strings
 
             Scaffold(
@@ -75,16 +77,21 @@ internal class EditorScreen @Inject constructor() : Screen {
                 topBar = {
                     EditorTopAppBar(
                         actionsEnabled = !(state.editModel?.checkDateIsRepeat() ?: false),
+                        countUndefinedTasks = state.undefinedTasks?.size ?: 0,
                         onBackIconClick = { dispatchEvent(EditorEvent.PressBackButton) },
                         onDeleteActionClick = { dispatchEvent(EditorEvent.PressDeleteButton) },
+                        onOpenUndefinedTasks = {
+                            isUndefinedTasksSheetOpen = true
+                        },
                         onTemplatesActionClick = {
-                            dispatchEvent(EditorEvent.LoadTemplates)
                             isTemplatesSheetOpen = true
                         },
                     )
                 },
                 snackbarHost = {
-                    SnackbarHost(hostState = hostState) { ErrorSnackbar(snackbarData = it) }
+                    SnackbarHost(hostState = hostState) {
+                        ErrorSnackbar(snackbarData = it)
+                    }
                 },
             )
 
@@ -97,6 +104,17 @@ internal class EditorScreen @Inject constructor() : Screen {
                 onChooseTemplate = { template ->
                     dispatchEvent(EditorEvent.ApplyTemplate(template))
                     isTemplatesSheetOpen = false
+                },
+            )
+
+            UndefinedTasksBottomSheet(
+                isShow = isUndefinedTasksSheetOpen,
+                undefinedTasks = state.undefinedTasks,
+                currentUndefinedTaskId = state.editModel?.undefinedTaskId,
+                onDismiss = { isUndefinedTasksSheetOpen = false },
+                onChooseUndefinedTask = {
+                    dispatchEvent(EditorEvent.ApplyUndefinedTask(it))
+                    isUndefinedTasksSheetOpen = false
                 },
             )
 

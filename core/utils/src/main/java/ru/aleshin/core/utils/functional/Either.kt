@@ -33,6 +33,8 @@ sealed class Either<out L, out R> {
 
 typealias DomainResult<L, R> = Either<L, R>
 
+typealias FlowDomainResult<L, R> = Flow<Either<L, R>>
+
 typealias UnitDomainResult<L> = Either<L, Unit>
 
 fun <L, R> Either<L, R>.rightOrElse(elseValue: R): R = when (this) {
@@ -60,6 +62,11 @@ suspend fun <L, R, T> Either<L, R>.handleAndGet(
     is Either.Left -> onLeftAction(this.data)
     is Either.Right -> onRightAction(this.data)
 }
+
+suspend fun <L, R> Either<L, R>.rightOrError(message: String) = handleAndGet(
+    onLeftAction = { error(message) },
+    onRightAction = { it },
+)
 
 suspend fun <L, R> Flow<Either<L, R>>.collectAndHandle(
     onLeftAction: suspend (L) -> Unit = {},

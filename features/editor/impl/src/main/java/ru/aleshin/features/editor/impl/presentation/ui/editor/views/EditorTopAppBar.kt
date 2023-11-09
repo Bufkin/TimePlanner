@@ -21,6 +21,7 @@ import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
+import ru.aleshin.core.ui.theme.TimePlannerRes
 import ru.aleshin.core.ui.views.*
 import ru.aleshin.features.editor.impl.presentation.theme.EditorThemeRes
 
@@ -31,7 +32,9 @@ import ru.aleshin.features.editor.impl.presentation.theme.EditorThemeRes
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun EditorTopAppBar(
     actionsEnabled: Boolean = true,
+    countUndefinedTasks: Int,
     onBackIconClick: () -> Unit,
+    onOpenUndefinedTasks: () -> Unit,
     onDeleteActionClick: () -> Unit,
     onTemplatesActionClick: () -> Unit,
 ) {
@@ -53,14 +56,28 @@ internal fun EditorTopAppBar(
         actions = {
             if (actionsEnabled) {
                 TopAppBarButton(
-                    imagePainter = painterResource(id = EditorThemeRes.icons.delete),
-                    imageDescription = EditorThemeRes.strings.topAppBarDeleteTitle,
-                    onButtonClick = onDeleteActionClick,
+                    imagePainter = painterResource(id = TimePlannerRes.icons.plannedTask),
+                    imageDescription = null,
+                    onButtonClick = onOpenUndefinedTasks,
+                    badge = if (countUndefinedTasks > 0) {{
+                        Badge { Text(text = countUndefinedTasks.toString()) }
+                    }} else {
+                        null
+                    },
                 )
                 TopAppBarButton(
                     imagePainter = painterResource(id = EditorThemeRes.icons.templates),
                     imageDescription = EditorThemeRes.strings.topAppBarTemplatesTitle,
                     onButtonClick = onTemplatesActionClick,
+                )
+                TopAppBarMoreActions(
+                    items = EditorTopAppBarActions.values(),
+                    onItemClick = {
+                        when (it) {
+                            EditorTopAppBarActions.DELETE -> onDeleteActionClick()
+                        }
+                    },
+                    moreIconDescription = null,
                 )
             } else {
                 TopAppBarEmptyButton()
@@ -70,6 +87,14 @@ internal fun EditorTopAppBar(
             containerColor = MaterialTheme.colorScheme.background,
         ),
     )
+}
+
+internal enum class EditorTopAppBarActions : TopAppBarAction {
+    DELETE {
+        override val icon @Composable get() = EditorThemeRes.icons.delete
+        override val title @Composable get() = EditorThemeRes.strings.topAppBarDeleteTitle
+        override val isAlwaysShow get() = false
+    },
 }
 
 /* ----------------------- Release Preview -----------------------

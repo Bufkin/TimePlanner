@@ -18,8 +18,8 @@ package ru.aleshin.features.home.api.data.mappers.schedules
 import ru.aleshin.core.utils.extensions.mapToDate
 import ru.aleshin.core.utils.functional.TimeRange
 import ru.aleshin.features.home.api.data.mappers.categories.mapToDomain
-import ru.aleshin.features.home.api.data.models.timetasks.TimeTaskDetails
-import ru.aleshin.features.home.api.data.models.timetasks.TimeTaskEntity
+import ru.aleshin.features.home.api.data.models.tasks.TimeTaskDetails
+import ru.aleshin.features.home.api.data.models.tasks.TimeTaskEntity
 import ru.aleshin.features.home.api.domain.entities.schedules.TimeTask
 
 /**
@@ -28,7 +28,8 @@ import ru.aleshin.features.home.api.domain.entities.schedules.TimeTask
 fun TimeTaskDetails.mapToDomain() = TimeTask(
     key = timeTask.key,
     date = timeTask.dailyScheduleDate.mapToDate(),
-    timeRanges = TimeRange(timeTask.startTime.mapToDate(), timeTask.endTime.mapToDate()),
+    timeRange = TimeRange(timeTask.startTime.mapToDate(), timeTask.endTime.mapToDate()),
+    createdAt = timeTask.createdAt?.mapToDate(),
     category = mainCategory.mainCategory.mapToDomain(),
     subCategory = subCategory?.mapToDomain(mainCategory.mainCategory.mapToDomain()),
     isCompleted = timeTask.isCompleted,
@@ -41,8 +42,9 @@ fun TimeTaskDetails.mapToDomain() = TimeTask(
 fun TimeTask.mapToData(dailyScheduleDate: Long) = TimeTaskEntity(
     key = key,
     dailyScheduleDate = dailyScheduleDate,
-    startTime = timeRanges.from.time,
-    endTime = timeRanges.to.time,
+    startTime = timeRange.from.time,
+    endTime = timeRange.to.time,
+    createdAt = createdAt?.time,
     mainCategoryId = category.id,
     subCategoryId = subCategory?.id,
     isCompleted = isCompleted,

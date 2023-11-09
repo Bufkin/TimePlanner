@@ -24,6 +24,7 @@ import ru.aleshin.features.home.api.domain.entities.schedules.TimeTask
 internal data class ScheduleAnalytics(
     val dateWorkLoadMap: WorkLoadMap,
     val categoriesAnalytics: CategoriesAnalytics,
+    val planningAnalytics: Map<Int, List<PlanningAnalytic>>,
     val totalTasksCount: Int,
     val totalTasksTime: Long,
     val averageDayLoad: Int,

@@ -24,4 +24,5 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 internal data class SettingsUi(
     val themeSettings: ThemeSettingsUi,
+    val tasksSettings: TasksSettingsUi,
 ) : Parcelable

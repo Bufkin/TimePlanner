@@ -20,6 +20,7 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.text.style.TextAlign
+import ru.aleshin.core.ui.theme.TimePlannerRes
 import ru.aleshin.core.ui.views.*
 import ru.aleshin.features.settings.impl.presentation.theme.SettingsThemeRes
 
@@ -29,7 +30,7 @@ import ru.aleshin.features.settings.impl.presentation.theme.SettingsThemeRes
 @Composable
 @OptIn(ExperimentalMaterial3Api::class)
 internal fun SettingsTopAppBar(
-    onResetToDefault: () -> Unit,
+    onResetToDefaultClick: () -> Unit,
     onMenuButtonClick: () -> Unit,
 ) {
     TopAppBar(
@@ -52,7 +53,7 @@ internal fun SettingsTopAppBar(
                 moreIconDescription = SettingsThemeRes.strings.moreIconDesc,
                 onItemClick = { action ->
                     when (action) {
-                        SettingsMoreActions.RESET_TO_DEFAULT -> onResetToDefault.invoke()
+                        SettingsMoreActions.RESET_TO_DEFAULT -> onResetToDefaultClick.invoke()
                     }
                 },
             )
@@ -66,7 +67,7 @@ internal fun SettingsTopAppBar(
 internal enum class SettingsMoreActions : TopAppBarAction {
     RESET_TO_DEFAULT {
         override val title: String @Composable get() = SettingsThemeRes.strings.resetToDefaultTitle
-        override val icon: Int @Composable get() = SettingsThemeRes.icons.default
+        override val icon: Int @Composable get() = TimePlannerRes.icons.reset
         override val isAlwaysShow: Boolean = false
     },
 }

@@ -28,6 +28,7 @@ data class EditModel(
     val date: Date,
     val startTime: Date,
     val endTime: Date,
+    val createdAt: Date? = null,
     val mainCategory: MainCategory = MainCategory(),
     val subCategory: SubCategory? = null,
     val isCompleted: Boolean = true,
@@ -35,7 +36,8 @@ data class EditModel(
     val isEnableNotification: Boolean = true,
     val isConsiderInStatistics: Boolean = true,
     val repeatEnabled: Boolean = false,
-    val repeatTimes: List<RepeatTime> = emptyList(),
     val templateId: Int? = null,
+    val undefinedTaskId: Long? = null,
+    val repeatTimes: List<RepeatTime> = emptyList(),
     val note: String? = null,
 )

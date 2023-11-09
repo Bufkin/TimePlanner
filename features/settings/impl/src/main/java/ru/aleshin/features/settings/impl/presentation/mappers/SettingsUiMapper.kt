@@ -15,7 +15,7 @@
  */
 package ru.aleshin.features.settings.impl.presentation.mappers
 
-import ru.aleshin.features.settings.impl.domain.entities.Settings
+import ru.aleshin.features.settings.api.domain.entities.Settings
 import ru.aleshin.features.settings.impl.presentation.models.SettingsUi
 
 /**
@@ -23,8 +23,10 @@ import ru.aleshin.features.settings.impl.presentation.models.SettingsUi
  */
 internal fun Settings.mapToUi() = SettingsUi(
     themeSettings = themeSettings.mapToUi(),
+    tasksSettings = tasksSettings.mapToUi(),
 )
 
 internal fun SettingsUi.mapToDomain() = Settings(
     themeSettings = themeSettings.mapToDomain(),
+    tasksSettings = tasksSettings.mapToDomain(),
 )
