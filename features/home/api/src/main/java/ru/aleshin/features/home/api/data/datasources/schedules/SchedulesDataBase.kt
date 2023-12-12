@@ -33,13 +33,12 @@ import ru.aleshin.features.home.api.data.models.tasks.TimeTaskEntity
 import ru.aleshin.features.home.api.data.models.tasks.UndefinedTaskEntity
 import ru.aleshin.features.home.api.data.models.template.RepeatTimeEntity
 import ru.aleshin.features.home.api.data.models.template.TemplateEntity
-import ru.aleshin.features.home.api.domain.entities.schedules.UndefinedTask
 
 /**
  * @author Stanislav Aleshin on 25.02.2023.
  */
 @Database(
-    version = 9,
+    version = 11,
     entities = [
         TemplateEntity::class,
         RepeatTimeEntity::class,
@@ -55,6 +54,8 @@ import ru.aleshin.features.home.api.domain.entities.schedules.UndefinedTask
         AutoMigration(from = 3, to = 4),
         AutoMigration(from = 6, to = 7),
         AutoMigration(from = 8, to = 9),
+        AutoMigration(from = 9, to = 10),
+        AutoMigration(from = 10, to = 11),
     ],
 )
 abstract class SchedulesDataBase : RoomDatabase() {

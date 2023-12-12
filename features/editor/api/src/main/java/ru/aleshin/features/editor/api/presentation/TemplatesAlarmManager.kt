@@ -29,6 +29,7 @@ import ru.aleshin.features.home.api.domain.entities.template.RepeatTime
 import ru.aleshin.features.home.api.domain.entities.template.Template
 import ru.aleshin.features.home.api.presentation.mappers.mapToIcon
 import ru.aleshin.features.home.api.presentation.mappers.mapToString
+import ru.aleshin.features.home.api.presentation.models.NotificationTimeType
 import java.util.Date
 import javax.inject.Inject
 
@@ -41,6 +42,7 @@ interface TemplatesAlarmManager {
 
     fun addRawNotifyAlarm(
         templateId: Int,
+        timeType: NotificationTimeType,
         repeatTime: RepeatTime,
         time: Date,
         category: String,
@@ -65,6 +67,7 @@ interface TemplatesAlarmManager {
 
         override fun addOrUpdateNotifyAlarm(template: Template, repeatTime: RepeatTime) = addRawNotifyAlarm(
             templateId = template.templateId,
+            timeType = NotificationTimeType.START_TASK,
             repeatTime = repeatTime,
             time = template.startTime,
             category = template.category.let { it.default?.mapToString(coreString) ?: it.customName } ?: "",
@@ -74,6 +77,7 @@ interface TemplatesAlarmManager {
 
         override fun addRawNotifyAlarm(
             templateId: Int,
+            timeType: NotificationTimeType,
             repeatTime: RepeatTime,
             time: Date,
             category: String,
@@ -85,10 +89,11 @@ interface TemplatesAlarmManager {
                 category = category,
                 subCategory = subCategory.orEmpty(),
                 icon = icon,
-                appIcon = fetchCoreIcons().calendar,
+                appIcon = fetchCoreIcons().logo,
                 time = time,
                 templateId = templateId,
                 repeatTime = repeatTime,
+                timeType = timeType,
             )
             val pendingAlarmIntent = createPendingAlarmIntent(alarmIntent, id)
             val triggerTime = repeatTime.nextDate(time)
@@ -102,10 +107,11 @@ interface TemplatesAlarmManager {
                 category = template.category.let { it.default?.mapToString(coreString) ?: it.customName } ?: "",
                 subCategory = template.subCategory?.name.orEmpty(),
                 icon = template.category.default?.mapToIcon(coreIcons),
-                appIcon = fetchCoreIcons().calendar,
+                appIcon = fetchCoreIcons().logo,
                 time = template.startTime,
                 templateId = template.templateId,
                 repeatTime = repeatTime,
+                timeType = NotificationTimeType.START_TASK,
             )
             val pendingAlarmIntent = createPendingAlarmIntent(alarmIntent, id)
 

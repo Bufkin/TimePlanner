@@ -70,6 +70,12 @@ internal data class EditorStrings(
     val noteLabel: String,
     val notePlaceholder: String,
     val undefinedTasksSheetTitle: String,
+    val fifteenMinutesBeforeTitle: String,
+    val oneHourBeforeTitle: String,
+    val threeHourBeforeTitle: String,
+    val oneDayBeforeTitle: String,
+    val oneWeekBeforeTitle: String,
+    val beforeEndTitle: String,
 )
 
 internal val russianHomeString = EditorStrings(
@@ -122,6 +128,12 @@ internal val russianHomeString = EditorStrings(
     noteLabel = "Заметка",
     notePlaceholder = "Небольшое примечание по желанию",
     undefinedTasksSheetTitle = "Не распределённые задачи",
+    fifteenMinutesBeforeTitle = "За 15 мин. до начала",
+    oneHourBeforeTitle = "За час до начала",
+    threeHourBeforeTitle = "За два часа до начала",
+    oneDayBeforeTitle = "За день до начала",
+    oneWeekBeforeTitle = "За неделю до начала",
+    beforeEndTitle = "Перед окончанием",
 )
 
 internal val englishHomeString = EditorStrings(
@@ -130,8 +142,8 @@ internal val englishHomeString = EditorStrings(
     topAppBarMoreIconDesc = "More",
     topAppBarTemplatesTitle = "Templates",
     mainCategoryChooserTitle = "Category",
-    mainCategoryChooserExpandedIconDesc = "Select category",
     subCategoryChooserTitle = "Subcategory",
+    mainCategoryChooserExpandedIconDesc = "Select category",
     categoryNotSelectedTitle = "Absent",
     subCategoryDialogAddedTitle = "Add",
     subCategoryDialogMainCategoryFormat = "Category: %s",
@@ -174,6 +186,12 @@ internal val englishHomeString = EditorStrings(
     noteLabel = "Note",
     notePlaceholder = "A small note is optional",
     undefinedTasksSheetTitle = "Non-distributed tasks",
+    fifteenMinutesBeforeTitle = "15 min. before the start",
+    oneHourBeforeTitle = "An hour before the start",
+    threeHourBeforeTitle = "Two hours before the start",
+    oneDayBeforeTitle = "The day before the start",
+    oneWeekBeforeTitle = "A week before the start",
+    beforeEndTitle = "Before the end",
 )
 
 internal val persianHomeString = EditorStrings(
@@ -182,8 +200,8 @@ internal val persianHomeString = EditorStrings(
     topAppBarMoreIconDesc = "بیشتر",
     topAppBarTemplatesTitle = "قالب ها",
     mainCategoryChooserTitle = "دسته بندی",
-    mainCategoryChooserExpandedIconDesc = "انتخاب دسته بندی",
     subCategoryChooserTitle = "زیرمجموعه",
+    mainCategoryChooserExpandedIconDesc = "انتخاب دسته بندی",
     categoryNotSelectedTitle = "خالی",
     subCategoryDialogAddedTitle = "افزودن",
     subCategoryDialogMainCategoryFormat = "دسته بندی: %s",
@@ -226,10 +244,16 @@ internal val persianHomeString = EditorStrings(
     noteLabel = "یادداشت",
     notePlaceholder = "یک یادداشت کوچک اختیاری است",
     undefinedTasksSheetTitle = "وظایف غیر توزیع شده",
+    fifteenMinutesBeforeTitle = "15دقیقه قبل از شروع",
+    oneHourBeforeTitle = "یک ساعت قبل از شروع",
+    threeHourBeforeTitle = "دو ساعت قبل از شروع",
+    oneDayBeforeTitle = "روز قبل از شروع",
+    oneWeekBeforeTitle = "یک هفته قبل از شروع",
+    beforeEndTitle = "قبل از پایان",
 )
 
 internal val germanHomeString = EditorStrings(
-    topAppBarEditorTitle = "Redakteur",
+    topAppBarEditorTitle = "Bearbeiten",
     topAppBarBackIconDesc = "Zurück",
     topAppBarMoreIconDesc = "Zusätzlich",
     topAppBarTemplatesTitle = "Muster",
@@ -240,7 +264,7 @@ internal val germanHomeString = EditorStrings(
     subCategoryDialogAddedTitle = "Hinzufügen",
     subCategoryDialogMainCategoryFormat = "Kategorie: %s",
     timeFieldStartLabel = "Start",
-    timeFieldEndLabel = "Das Ende",
+    timeFieldEndLabel = "Ende",
     parameterChooserSwitchIconDesc = "Parameter festlegen",
     timePickerHeader = "Zeit wählen",
     timePickerSeparator = ":",
@@ -249,7 +273,7 @@ internal val germanHomeString = EditorStrings(
     statisticsParameterTitle = "Statistik",
     statisticsParameterDesc = "Daten in Statistiken berücksichtigen",
     saveTaskButtonTitle = "Speichern",
-    cancelButtonTitle = "Abschaffen",
+    cancelButtonTitle = "Abbrechen",
     templateIconDesc = "Zu Vorlagen hinzufügen",
     topAppBarDeleteTitle = "Entfernen",
     categoryValidateError = "* Wählen Sie eine Kategorie aus",
@@ -277,6 +301,12 @@ internal val germanHomeString = EditorStrings(
     noteLabel = "Notiz",
     notePlaceholder = "Eine kleine Anmerkung optional",
     undefinedTasksSheetTitle = "Nicht verteilte Aufgaben",
+    fifteenMinutesBeforeTitle = "15 Minuten vor dem Start",
+    oneHourBeforeTitle = "Eine Stunde vor Beginn",
+    threeHourBeforeTitle = "Zwei Stunden vor Beginn",
+    oneDayBeforeTitle = "Einen Tag vor Beginn",
+    oneWeekBeforeTitle = "Eine Woche vor dem Start",
+    beforeEndTitle = "Vor dem Ende",
 )
 
 internal val spanishHomeString = EditorStrings(
@@ -285,8 +315,8 @@ internal val spanishHomeString = EditorStrings(
     topAppBarMoreIconDesc = "Más",
     topAppBarTemplatesTitle = "Plantillas",
     mainCategoryChooserTitle = "Categoría",
-    mainCategoryChooserExpandedIconDesc = "Selecciona categoría",
     subCategoryChooserTitle = "Subcategoría",
+    mainCategoryChooserExpandedIconDesc = "Selecciona categoría",
     categoryNotSelectedTitle = "Ninguna",
     subCategoryDialogAddedTitle = "Añadir",
     subCategoryDialogMainCategoryFormat = "Categoría: %s",
@@ -329,6 +359,12 @@ internal val spanishHomeString = EditorStrings(
     noteLabel = "Nota",
     notePlaceholder = "Una pequeña nota opcional",
     undefinedTasksSheetTitle = "Tareas no distribuidas",
+    fifteenMinutesBeforeTitle = "15 minutos antes del Inicio",
+    oneHourBeforeTitle = "Una hora antes del Inicio",
+    threeHourBeforeTitle = "Dos horas antes del Inicio",
+    oneDayBeforeTitle = "Un día antes del Inicio",
+    oneWeekBeforeTitle = "Una semana antes del Inicio",
+    beforeEndTitle = "Antes de terminar",
 )
 
 internal val frenchHomeString = EditorStrings(
@@ -337,8 +373,8 @@ internal val frenchHomeString = EditorStrings(
     topAppBarMoreIconDesc = "Plus",
     topAppBarTemplatesTitle = "Modèles",
     mainCategoryChooserTitle = "Catégorie",
-    mainCategoryChooserExpandedIconDesc = "Sélectionner la catégorie",
     subCategoryChooserTitle = "Sous-catégorie",
+    mainCategoryChooserExpandedIconDesc = "Sélectionner la catégorie",
     categoryNotSelectedTitle = "Absent",
     subCategoryDialogAddedTitle = "Ajouter",
     subCategoryDialogMainCategoryFormat = "Catégorie: %s",
@@ -381,6 +417,12 @@ internal val frenchHomeString = EditorStrings(
     noteLabel = "Note",
     notePlaceholder = "Petite Note en option",
     undefinedTasksSheetTitle = "Tâches non distribuées",
+    fifteenMinutesBeforeTitle = "15 minutes avant le début",
+    oneHourBeforeTitle = "Une heure avant le début",
+    threeHourBeforeTitle = "Deux heures avant le début",
+    oneDayBeforeTitle = "La veille du début",
+    oneWeekBeforeTitle = "Une semaine avant le début",
+    beforeEndTitle = "Avant la fin",
 )
 
 internal val brazilianPortugueseHomeString = EditorStrings(
@@ -389,8 +431,8 @@ internal val brazilianPortugueseHomeString = EditorStrings(
     topAppBarMoreIconDesc = "Mais",
     topAppBarTemplatesTitle = "Templates",
     mainCategoryChooserTitle = "Categorias",
-    mainCategoryChooserExpandedIconDesc = "Selecione uma categoria",
     subCategoryChooserTitle = "Subcategoria",
+    mainCategoryChooserExpandedIconDesc = "Selecione uma categoria",
     categoryNotSelectedTitle = "Nenhum",
     subCategoryDialogAddedTitle = "Adicionar",
     subCategoryDialogMainCategoryFormat = "Categoria: %s",
@@ -432,6 +474,71 @@ internal val brazilianPortugueseHomeString = EditorStrings(
     importantParameterDesc = "Execução obrigatória, sem possibilidade de pular",
     noteLabel = "Nota",
     notePlaceholder = "Uma nota é opcional",
+    undefinedTasksSheetTitle = "Tarefas não distribuídas",
+    fifteenMinutesBeforeTitle = "15 minutos antes do início",
+    oneHourBeforeTitle = "Uma hora antes do início",
+    threeHourBeforeTitle = "Duas horas antes do início",
+    oneDayBeforeTitle = "No dia anterior ao início",
+    oneWeekBeforeTitle = "Uma semana antes do início",
+    beforeEndTitle = "Antes do fim",
+)
+
+internal val turkishHomeString = EditorStrings(
+    topAppBarEditorTitle = "Editör",
+    topAppBarBackIconDesc = "Geri",
+    topAppBarMoreIconDesc = "Daha Fazla",
+    topAppBarTemplatesTitle = "Şablonlar",
+    mainCategoryChooserTitle = "Kategori",
+    subCategoryChooserTitle = "Alt Kategori",
+    mainCategoryChooserExpandedIconDesc = "Kategori Seçin",
+    categoryNotSelectedTitle = "Yok",
+    subCategoryDialogAddedTitle = "Ekle",
+    subCategoryDialogMainCategoryFormat = "Kategori: %s",
+    timeFieldStartLabel = "Başlangıç",
+    timeFieldEndLabel = "Bitiş",
+    parameterChooserSwitchIconDesc = "Parametre Belirle",
+    timePickerHeader = "Zamanı Girin",
+    timePickerSeparator = ":",
+    notifyParameterTitle = "Bildirimler",
+    notifyParameterDesc = "Bu görev tamamlandığında bildirim gönder",
+    statisticsParameterTitle = "İstatistikler",
+    statisticsParameterDesc = "Görevi istatistiklere dahil et",
+    saveTaskButtonTitle = "Kaydet",
+    cancelButtonTitle = "İptal",
+    templateIconDesc = "Şablonlara Ekle",
+    topAppBarDeleteTitle = "Sil",
+    categoryValidateError = "* Bir kategori seçin",
+    otherError = "Hata! Geliştirici ile iletişime geçin.",
+    startOverlayError = "Çakışma! Görev başlangıcı üst üste.",
+    endOverlayError = "Çakışma! Görev bitişi üst üste.",
+    fullOverlayError = "Çakışma! Örtüşen görevler.",
+    correctOverlayTitle = "Düzelt",
+    durationPickerTitle = "Süre",
+    templatesSheetTitle = "Şablonlar",
+    controlTitle = "Yönet",
+    applyTitle = "Uygula",
+    timeRangeFormat = "Zaman: %S ile %s arasında",
+    durationFormat = "Süre: %s",
+    notificationEnabledTitle = "Bildirim: etkin",
+    notificationDisabledTitle = "Bildirim: devre dışı",
+    emptyTemplatesTitle = "Liste boş",
+    saveTemplateWarningTitle = "Değişiklikleri mevcut şablona uygulamak istiyor musunuz?",
+    saveTemplateWarningConfirm = "Evet",
+    saveTemplateWarningUnsave = "Hayır",
+    categoriesManageWarningTitle = "Kategori yönetim ekranına gitmek istediğinizden emin misiniz? " +
+        "Mevcut parametreler kaydedilmeyecek.",
+    confirmNavigateTitle = "Git",
+    importantParameterTitle = "Özel Öncelik",
+    importantParameterDesc = "Kaydırma olmadan zorunlu yürütme",
+    noteLabel = "Not",
+    notePlaceholder = "Küçük bir not (isteğe bağlı)",
+    undefinedTasksSheetTitle = "Dağıtılmamış Görevler",
+    fifteenMinutesBeforeTitle = "Başlamadan 15 dakika önce",
+    oneHourBeforeTitle = "Başlangıçtan bir saat önce",
+    threeHourBeforeTitle = "Başlangıçtan iki saat önce",
+    oneDayBeforeTitle = "Başlangıçtan bir gün önce",
+    oneWeekBeforeTitle = "Başlamadan bir hafta önce",
+    beforeEndTitle = "Bitişten önce",
 )
 
 internal val LocalEditorStrings = staticCompositionLocalOf<EditorStrings> {
@@ -446,4 +553,5 @@ internal fun fetchEditorStrings(language: TimePlannerLanguage) = when (language)
     TimePlannerLanguage.FA -> persianHomeString
     TimePlannerLanguage.FR -> frenchHomeString
     TimePlannerLanguage.PT -> brazilianPortugueseHomeString
+    TimePlannerLanguage.TR -> turkishHomeString
 }

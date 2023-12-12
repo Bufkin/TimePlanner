@@ -20,6 +20,7 @@ import ru.aleshin.core.utils.functional.TimeRange
 import ru.aleshin.features.home.api.data.mappers.categories.mapToDomain
 import ru.aleshin.features.home.api.data.models.tasks.TimeTaskDetails
 import ru.aleshin.features.home.api.data.models.tasks.TimeTaskEntity
+import ru.aleshin.features.home.api.domain.entities.schedules.TaskNotifications
 import ru.aleshin.features.home.api.domain.entities.schedules.TimeTask
 
 /**
@@ -35,6 +36,14 @@ fun TimeTaskDetails.mapToDomain() = TimeTask(
     isCompleted = timeTask.isCompleted,
     isImportant = timeTask.isImportant,
     isEnableNotification = timeTask.isEnableNotification,
+    taskNotifications = TaskNotifications(
+        fifteenMinutesBefore = timeTask.fifteenMinutesBeforeNotify,
+        oneHourBefore = timeTask.oneHourBeforeNotify,
+        threeHourBefore = timeTask.threeHourBeforeNotify,
+        oneDayBefore = timeTask.oneDayBeforeNotify,
+        oneWeekBefore = timeTask.oneWeekBeforeNotify,
+        beforeEnd = timeTask.beforeEndNotify,
+    ),
     isConsiderInStatistics = timeTask.isConsiderInStatistics,
     note = timeTask.note,
 )
@@ -50,6 +59,12 @@ fun TimeTask.mapToData(dailyScheduleDate: Long) = TimeTaskEntity(
     isCompleted = isCompleted,
     isImportant = isImportant,
     isEnableNotification = isEnableNotification,
+    fifteenMinutesBeforeNotify = taskNotifications.fifteenMinutesBefore,
+    oneHourBeforeNotify = taskNotifications.oneHourBefore,
+    threeHourBeforeNotify = taskNotifications.threeHourBefore,
+    oneWeekBeforeNotify = taskNotifications.oneWeekBefore,
+    oneDayBeforeNotify = taskNotifications.oneDayBefore,
+    beforeEndNotify = taskNotifications.beforeEnd,
     isConsiderInStatistics = isConsiderInStatistics,
     note = note,
 )

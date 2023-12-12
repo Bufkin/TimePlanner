@@ -23,7 +23,7 @@ import ru.aleshin.core.ui.R
  */
 data class TimePlannerIcons(
     val logo: Int,
-    val calendar: Int,
+    val splashIcon: Int,
     val categoryWorkIcon: Int,
     val categoryRestIcon: Int,
     val categorySportIcon: Int,
@@ -56,11 +56,12 @@ data class TimePlannerIcons(
     val reset: Int,
     val overview: Int,
     val plannedTask: Int,
+    val menuNavArrow: Int,
 )
 
 internal val baseTimePlannerIcons = TimePlannerIcons(
     logo = R.drawable.ic_time_planner,
-    calendar = R.drawable.ic_calendar,
+    splashIcon = R.drawable.ic_splash,
     categoryWorkIcon = R.drawable.ic_work,
     categoryRestIcon = R.drawable.ic_rest,
     categorySportIcon = R.drawable.ic_sport,
@@ -93,6 +94,7 @@ internal val baseTimePlannerIcons = TimePlannerIcons(
     reset = R.drawable.ic_reset,
     overview = R.drawable.ic_dashboard,
     plannedTask = R.drawable.ic_planned_task,
+    menuNavArrow = R.drawable.ic_arrow_right,
 )
 
 val LocalTimePlannerIcons = staticCompositionLocalOf<TimePlannerIcons> {

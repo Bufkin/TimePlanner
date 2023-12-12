@@ -56,14 +56,14 @@ internal fun BaseTimeField(
     Surface(
         enabled = enabled,
         onClick = { openDialog = true },
-        modifier = modifier.height(56.dp),
+        modifier = modifier.height(56.dp).widthIn(min = 120.dp),
         shape = MaterialTheme.shapes.medium,
         tonalElevation = TimePlannerRes.elevations.levelOne,
     ) {
         Row(
-            modifier = Modifier.padding(horizontal = 8.dp),
+            modifier = Modifier.padding(horizontal = 12.dp),
             verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
         ) {
             Icon(
                 modifier = Modifier.size(24.dp),
@@ -74,7 +74,7 @@ internal fun BaseTimeField(
                     false -> MaterialTheme.colorScheme.onSurfaceVariant
                 },
             )
-            Column(modifier = Modifier.requiredWidthIn(max = 74.dp).fillMaxWidth()) {
+            Column {
                 val textColor = when (isError) {
                     true -> MaterialTheme.colorScheme.error
                     false -> MaterialTheme.colorScheme.onSurface

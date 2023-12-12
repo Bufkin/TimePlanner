@@ -25,5 +25,6 @@ import kotlinx.parcelize.Parcelize
 internal data class EditParameters(
     val isImportant: Boolean = false,
     val isEnableNotification: Boolean = true,
+    val taskNotifications: TaskNotificationsUi = TaskNotificationsUi(),
     val isConsiderInStatistics: Boolean = true,
 ) : Parcelable

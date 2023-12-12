@@ -20,9 +20,11 @@ import ru.aleshin.core.utils.functional.ParameterizedMapper
 import ru.aleshin.core.utils.functional.TimeRange
 import ru.aleshin.core.utils.managers.DateManager
 import ru.aleshin.features.home.api.domain.common.TimeTaskStatusChecker
+import ru.aleshin.features.home.api.domain.entities.schedules.TaskNotifications
 import ru.aleshin.features.home.api.domain.entities.schedules.TimeTask
 import ru.aleshin.features.home.impl.presentation.mapppers.categories.mapToDomain
 import ru.aleshin.features.home.impl.presentation.mapppers.categories.mapToUi
+import ru.aleshin.features.home.impl.presentation.models.schedules.TaskNotificationsUi
 import ru.aleshin.features.home.impl.presentation.models.schedules.TimeTaskUi
 import javax.inject.Inject
 
@@ -52,12 +54,22 @@ internal interface TimeTaskDomainToUiMapper : ParameterizedMapper<TimeTask, Time
             isCompleted = input.isCompleted,
             isImportant = input.isImportant,
             isEnableNotification = input.isEnableNotification,
+            taskNotifications = input.taskNotifications.mapToUi(),
             isConsiderInStatistics = input.isConsiderInStatistics,
             isTemplate = parameter,
             note = input.note,
         )
     }
 }
+
+internal fun TaskNotifications.mapToUi() = TaskNotificationsUi(
+    fifteenMinutesBefore = fifteenMinutesBefore,
+    oneHourBefore = oneHourBefore,
+    threeHourBefore = threeHourBefore,
+    oneDayBefore = oneDayBefore,
+    oneWeekBefore = oneWeekBefore,
+    beforeEnd = beforeEnd,
+)
 
 internal fun TimeTaskUi.mapToDomain() = TimeTask(
     key = key,
@@ -69,6 +81,16 @@ internal fun TimeTaskUi.mapToDomain() = TimeTask(
     isImportant = isImportant,
     isCompleted = isCompleted,
     isEnableNotification = isEnableNotification,
+    taskNotifications = taskNotifications.mapToDomain(),
     isConsiderInStatistics = isConsiderInStatistics,
     note = note,
+)
+
+internal fun TaskNotificationsUi.mapToDomain() = TaskNotifications(
+    fifteenMinutesBefore = fifteenMinutesBefore,
+    oneHourBefore = oneHourBefore,
+    threeHourBefore = threeHourBefore,
+    oneDayBefore = oneDayBefore,
+    oneWeekBefore = oneWeekBefore,
+    beforeEnd = beforeEnd,
 )

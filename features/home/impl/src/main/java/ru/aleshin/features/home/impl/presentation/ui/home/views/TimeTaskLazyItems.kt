@@ -80,6 +80,7 @@ internal fun LazyItemScope.PlannedTimeTaskItem(
                     taskDurationTitle = duration.toMinutesOrHoursTitle(),
                     categoryIcon = mainCategory.defaultType?.mapToIconPainter(),
                     isImportant = isImportant,
+                    enabledNotifications = isEnableNotification,
                     note = note,
                 )
             }
@@ -214,9 +215,10 @@ internal fun LazyItemScope.AddTimeTaskViewItem(
                 }
             }
             AddTimeTaskView(
-                onViewClicked = onAddClick,
-                remainingTimeTitle = duration(startTime, endTime).toMinutesOrHoursTitle(),
+                showAddIconForFreeTime = startTime >= Date(),
                 isFreeTime = duration(startTime, endTime) >= Constants.Date.MILLIS_IN_MINUTE,
+                remainingTimeTitle = duration(startTime, endTime).toMinutesOrHoursTitle(),
+                onViewClicked = onAddClick,
             )
         }
     }

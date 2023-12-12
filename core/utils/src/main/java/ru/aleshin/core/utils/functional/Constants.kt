@@ -21,6 +21,7 @@ package ru.aleshin.core.utils.functional
 object Constants {
 
     object App {
+        const val SPLASH_NAME = "TIME\nPLANNER"
         const val NAME = "TimePlanner"
         const val DEVELOPER = "Stanislav Aleshin"
         const val LICENCE = "Apache Licence v2.0"
@@ -37,6 +38,7 @@ object Constants {
 
     object Notification {
         const val CHANNEL_ID = "timeTaskAlarmChannel"
+        const val CHANNEL_ID_NEW = "timeTaskNewAlarmChannel"
     }
 
     object Backup {
@@ -47,6 +49,7 @@ object Constants {
 
     object Alarm {
         const val ALARM_NOTIFICATION_ACTION = "ru.aleshin.ALARM_NOTIFICATION_ACTION"
+        const val NOTIFICATION_TIME_TYPE = "ALARM_DATA_TIME_TYPE"
         const val NOTIFICATION_CATEGORY = "ALARM_DATA_CATEGORY"
         const val NOTIFICATION_SUBCATEGORY = "ALARM_DATA_SUBCATEGORY"
         const val NOTIFICATION_ICON = "ALARM_DATA_ICON"
@@ -62,11 +65,14 @@ object Constants {
 
     object Placeholder {
         const val ITEMS = 6
+        const val MANY_ITEMS = 15
     }
 
     object Delay {
         const val LOAD_ANIMATION = 400L
-        const val SPLASH = 1500L
+        const val SPLASH_NAV = 1800L
+        const val SPLASH_LOGO = 300L
+        const val SPLASH_TEXT = 600L
         const val CHECK_STATUS = 5000L
     }
 
@@ -91,9 +97,9 @@ object Constants {
         const val OVERVIEW_NEXT_DAYS = 15
         const val OVERVIEW_PREVIOUS_DAYS = 14
 
-        const val minutesFormat = "%s%s"
-        const val hoursFormat = "%s%s"
-        const val hoursAndMinutesFormat = "%s%s %s%s"
+        const val MINUTES_FORMAT = "%s%s"
+        const val HOURS_FORMAT = "%s%s"
+        const val HOURS_AND_MINUTES_FORMAT = "%s%s %s%s"
 
         const val SHIFT_MINUTE_VALUE = 5
     }
